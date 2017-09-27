@@ -22,6 +22,8 @@ public class SecondLevelCache {
 		System.out.println(market1.getShopNum() + "--1--" + market1.getShopName() + "--2--" + market1.getMarketName()
 				+ "--3--" + market1.getNoOfShop());
 
+	
+		System.out.println("2222222");
 		MarketDTO market2 = (MarketDTO) session2.get(MarketDTO.class, 1);
 		System.out.println(market2.getShopNum() + "--1--" + market2.getShopName() + "--2--" + market2.getMarketName()
 				+ "--3--" + market2.getNoOfShop());

@@ -6,6 +6,7 @@
 
 <hibernate-mapping>
 	<class name="com.bridgeit.Demo.MarketDTO" table="market_table">
+		<!-- <cache usage="read-only" /> -->
 		<id name="shopNum" column="shop_number" type="integer">
 			<generator class="assigned" />
 		</id>
