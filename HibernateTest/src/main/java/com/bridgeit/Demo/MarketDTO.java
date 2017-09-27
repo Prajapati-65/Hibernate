@@ -2,11 +2,14 @@ package com.bridgeit.Demo;
 
 import java.io.Serializable;
 
-import javax.persistence.Id;
-
 
 public class MarketDTO implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private int shopNum;
 	
 	private String shopName;

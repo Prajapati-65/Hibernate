@@ -6,7 +6,7 @@
 
 <hibernate-configuration>
 	<session-factory>
-		<property name="hbm2ddl.auto">create</property>
+		<property name="hbm2ddl.auto">update</property>
 		<property name="dilect">org.hibernate.dialect.MySQLDialect</property>
 		<property name="connection.url">jdbc:mysql://localhost:3306/BankApp</property>
 		<property name="connection.username">root</property>
