@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+
+<hibernate-mapping>
+	<class name="com.bridgeit.Demo.MarketDTO" table="market_table">
+		<id name="shopNum" column="shop_number" type="integer">
+			<generator class="assigned" />
+		</id>
+
+		<property name="shopName" column="shop_Name" type="string" />
+		<property name="marketName" column="market_Name" type="string" />
+		<property name="noOfShop" column="noof_shop" type="integer" />
+
+	</class>
+</hibernate-mapping>
