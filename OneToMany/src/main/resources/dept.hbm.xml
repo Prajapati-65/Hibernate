@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+
+	<class name="com.bridgeit.OneToMany.Dept" table="dept">
+		<id name="deptId" column="dept_id">
+			<generator class="assigned" />
+		</id>
+		<property name="deptName" column="dept_name" type="string" />
+		<set name="employees" table="employee" cascade="persist, delete">
+			<key column="dept_id" />
+			<one-to-many class="com.bridgeit.OneToMany.Employee" />
+		</set>
+	</class>
+	
+	
+	<class name="com.bridgeit.OneToMany.Employee" table="employee">
+		<id name="employeeId" column="employee_id">
+			<generator class="assigned" />
+		</id>
+		<property name="employeeName" column="employee_name" type="string" />
+	</class>
+	
+	
+</hibernate-mapping>

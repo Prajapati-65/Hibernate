@@ -8,7 +8,8 @@
 	<session-factory>
 		<property name="hbm2ddl.auto">update</property>
 		<property name="dilect">org.hibernate.dialect.MySQLDialect</property>
-		<property name="connection.url">jdbc:mysql://localhost:3306/BankApp</property>
+		
+		<property name="connection.url">jdbc:mysql://localhost:3306/Hibernate</property>
 		<property name="connection.username">root</property>
 		<property name="connection.password">password</property>
 		<property name="connection.driver_class">com.mysql.jdbc.Driver</property>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+
+
+  <class name="com.bridgeit.OneToOneDTO.Student" table="studentinfo">
+    <id name="sid">
+      <generator class="sequence">
+        <param name="sequence">student_seq</param>
+      </generator>
+    </id>
+    <property name="sname"/>
+    <one-to-one name="address" class="com.bridgeit.OneToOneDTO.Address"></one-to-one>
+  </class>
+
+
+
+
+  <class name="com.bridgeit.OneToOneDTO.Address" table="addressinfo">
+    <id name="sid">
+      <generator class="foreign">
+        <param name="property">student</param>
+      </generator>
+    </id>
+    
+    <property name="flatno"/>
+    <property name="plotno"/>
+    <property name="street"/>
+    <property name="city"/>
+    <one-to-one name="student" class="com.bridgeit.OneToOneDTO.Student" constrained="true"></one-to-one>
+  </class>
+</hibernate-mapping>
+	
