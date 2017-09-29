@@ -5,21 +5,26 @@ import org.hibernate.cfg.Configuration;
 
 public class SingleTonSF {
 
-	private SingleTonSF() {
-
+	public SingleTonSF() {
+		// TODO Auto-generated constructor stub
 	}
 
 	public static SessionFactory sf;
 
 	
-	public static SessionFactory getSF() {
+	/**
+	 * @param  abc
+	 * @return
+	 */
+	public static SessionFactory getSF(int abc) {
+
 		if (sf == null) {
 			Configuration c = new Configuration();
 			c.configure("hibernate.cfg.xml");
+
 			sf = c.buildSessionFactory();
 			return sf;
 		}
 		return sf;
 	}
-
 }

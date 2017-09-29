@@ -7,7 +7,8 @@ import org.hibernate.Transaction;
 import com.bridgeit.OneToMany.Dept;
 import com.bridgeit.SingleTon.SingleTonSF;
 
-public class DeleteRecard {
+public class DeleteRecard { 
+	
 
 	public static void main(String args[]) {
 

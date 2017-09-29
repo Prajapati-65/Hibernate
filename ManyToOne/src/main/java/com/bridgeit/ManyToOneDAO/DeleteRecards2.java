@@ -1,6 +1,7 @@
 package com.bridgeit.ManyToOneDAO;
 
 import java.util.Iterator;
+import java.util.List;
 
 import javax.persistence.Query;
 
@@ -22,12 +23,11 @@ public class DeleteRecards2 {
 
 		Query q = s.createQuery("FROM Employee");
 
-	/*	
+	/*
 		
 		
 		Employee e1 = null;
 		Iterator it = q.iterate();
-
 		while (it.hasNext()) {
 			e1 = (Employee) it.next();
 			s.delete(e1);
@@ -37,8 +37,8 @@ public class DeleteRecards2 {
 
 		
 		
+	
 		*/
-		
 		
 		tx.commit();
 		s.close();

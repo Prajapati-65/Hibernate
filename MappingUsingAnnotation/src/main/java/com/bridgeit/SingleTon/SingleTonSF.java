@@ -16,6 +16,7 @@ public class SingleTonSF {
 		if (sf == null) {
 			Configuration c = new Configuration();
 			c.configure("hibernate.cfg.xml");
+			
 			sf = c.buildSessionFactory();
 			return sf;
 		}
