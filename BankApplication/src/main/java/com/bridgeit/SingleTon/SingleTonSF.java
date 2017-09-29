@@ -11,12 +11,7 @@ public class SingleTonSF {
 
 	public static SessionFactory sf;
 
-	
-	/**
-	 * @param  abc
-	 * @return
-	 */
-	public static SessionFactory getSF(int abc) {
+	public static SessionFactory getSF() {
 
 		if (sf == null) {
 			Configuration c = new Configuration();
