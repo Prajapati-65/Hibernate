@@ -262,7 +262,7 @@
 				url : 'DeleteAccount',
 				type : 'post',
 				data : {
-					id : id,
+					id : id
 				},
 				success : function() {
 					displayCityData(currentCity);
