@@ -14,7 +14,6 @@
 		<property name="show_sql">true</property>
 		<property name="cache.use_second_level_cache">true</property>
 		<property name="cache.provider_class">org.hibernate.cache.EhCacheProvider</property>
-		
 		<mapping class="com.bridgeit.BankDTO.UserDTO"></mapping>
 		<mapping class="com.bridgeit.BankDTO.AccountDTO"></mapping>
 	</session-factory>

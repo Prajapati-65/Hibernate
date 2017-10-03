@@ -28,9 +28,12 @@ public class AccountView extends HttpServlet {
 		
 		HttpSession session = req.getSession();
 		String email =(String) session.getAttribute("email");
-		String id = BankDAO.id(email);
+		int id = BankDAO.id(email);
 		PrintWriter printWriter = resp.getWriter();
 		printWriter.println("<h1>Account List</h1>");
+		
+		//System.out.println("details --> "+BankDAO.getAllAccount(city,id));
+		
 		List<AccountDTO> list = BankDAO.getAllAccount(city,id);
 		req.setAttribute("list", list);
 		RequestDispatcher dispatcher = req.getRequestDispatcher("citydetails.jsp");

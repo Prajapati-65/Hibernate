@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import com.bridgeit.BankDAO.BankDAO;
 import com.bridgeit.BankDTO.AccountDTO;
+import com.bridgeit.BankDTO.UserDTO;
 
 
 //@WebServlet("/AddAccountDetails")
@@ -23,7 +24,7 @@ public class AddAccountDetails extends HttpServlet {
 		
 		HttpSession session = req.getSession();
 		String emailid=(String) session.getAttribute("email");
-		String id = BankDAO.id(emailid);
+		int id = BankDAO.id(emailid);
 		session.setAttribute("id", id);
 		
 		resp.setContentType("text/html");
@@ -34,13 +35,16 @@ public class AddAccountDetails extends HttpServlet {
 		String email = req.getParameter("email");
 		String city = req.getParameter("city");
 		String accountnumber = req.getParameter("accountnumber");
+		
+		UserDTO  user = new UserDTO();
+		user.setId((int)session.getAttribute("id"));
+		
 		AccountDTO account = new AccountDTO();
 		account.setName(name);
 		account.setEmail(email);
 		account.setCity(city);
 		account.setAccountnumber(accountnumber);
-		account.setUserId(id);
-		
+		account.setUser(user);
 		BankDAO.saveAccountData(account);
 		RequestDispatcher dispatcher = req.getRequestDispatcher("homepage.jsp");
 		dispatcher.forward(req, resp);

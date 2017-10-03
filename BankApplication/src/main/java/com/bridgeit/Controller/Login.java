@@ -17,27 +17,22 @@ import com.bridgeit.BankDTO.UserDTO;
 
 //@WebServlet("/Login")
 public class Login extends HttpServlet {
-
+	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		resp.setContentType("text/html");
 		PrintWriter out = resp.getWriter();
 		String email = req.getParameter("email");
 		String password = req.getParameter("password");
-		
 		UserDTO user = new UserDTO();
-		user.setEmail(email);
-		user.setPassword(password);
-		
 		UserDAO userdao = new UserDAO();
-		String name = userdao.loginUser(email, password);
-
-		System.out.println("User name-->" + name);
-		if (name != "false") {
+		user = userdao.loginUser(email, password);
+		
+		if (user!=null) {
 			HttpSession session = req.getSession();
-			session.setAttribute("name", name);
-			session.setAttribute("email", email);
-			
+			session.setAttribute("name", user.getName());
+			session.setAttribute("email", user.getEmail());
+			session.setAttribute("id", user.getId());
 			RequestDispatcher dispatcher = req.getRequestDispatcher("homepage.jsp");
 			dispatcher.forward(req, resp);
 		} else {
@@ -46,4 +41,14 @@ public class Login extends HttpServlet {
 
 		}
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

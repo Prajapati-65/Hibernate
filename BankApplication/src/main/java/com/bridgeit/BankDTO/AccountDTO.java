@@ -7,6 +7,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -32,16 +34,27 @@ public class AccountDTO implements Serializable {
 	@Column (name="city")
 	private String city;
 	
-	@Column (name="userId")
-	private String userId;
+	
 	
 	@Id
 	@GenericGenerator (name="gen",strategy="increment")
 	@GeneratedValue (generator="gen")
 	private int id;
 
+	@ManyToOne
+	@JoinColumn(name="userId")
+	UserDTO user;
 	
 	
+	
+	public UserDTO getUser() {
+		return user;
+	}
+
+	public void setUser(UserDTO user) {
+		this.user = user;
+	}
+
 	public AccountDTO() {
 	
 	}
@@ -78,13 +91,6 @@ public class AccountDTO implements Serializable {
 		this.city = city;
 	}
 
-	public String getUserId() {
-		return userId;
-	}
-
-	public void setUserId(String userId) {
-		this.userId = userId;
-	}
 
 	public int getId() {
 		return id;

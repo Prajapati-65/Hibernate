@@ -2,11 +2,14 @@ package com.bridgeit.BankDTO;
 
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -36,6 +39,12 @@ public class UserDTO implements Serializable {
 	
 	@Column (name="mobilenumber")
 	private String mobilenumber;
+	
+	
+	
+	@OneToMany(mappedBy="user")
+	private Set<AccountDTO> account = new HashSet<>();
+
 	
 	public UserDTO() {
 
