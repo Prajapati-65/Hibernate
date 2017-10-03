@@ -9,7 +9,6 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -19,6 +18,22 @@ import com.bridgeit.BankDTO.UserDTO;
 import com.bridgeit.SingleTon.SingleTonSF;
 
 public class BankDAO {
+
+	public static int id(String email) {
+		SessionFactory sessionFactory = SingleTonSF.getSF();
+		Session session = sessionFactory.openSession();
+		int id = 0;
+		try {
+			Criteria c = session.createCriteria(UserDTO.class);
+			c.add(Restrictions.eq("email", email));
+			UserDTO user = (UserDTO) c.uniqueResult();
+			id = user.getId();
+			session.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return id;
+	}
 
 	public static int saveAccountData(AccountDTO account) {
 		SessionFactory sessionFactory = SingleTonSF.getSF();
@@ -45,52 +60,44 @@ public class BankDAO {
 		return status;
 	}
 
-	@SuppressWarnings({ "deprecation", "unchecked" })
+	public static List<AccountDTO> getAllAccount(String city, int userId) {
+		List<AccountDTO> list = new ArrayList<AccountDTO>();
+		SessionFactory sessionFactory = SingleTonSF.getSF();
+		Session session = sessionFactory.openSession();
+		UserDTO user = new UserDTO();
+		user.setId(userId);
+		try {
+			Criteria c = session.createCriteria(AccountDTO.class);
+			c.add(Restrictions.eq("city", city));
+			c.add(Restrictions.eq("user", user));
+			list=c.list();
+			session.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+
 	public static int deleteAccount(int id) {
 		SessionFactory sessionFactory = SingleTonSF.getSF();
 		Session session = sessionFactory.openSession();
 		int status = 0;
 		try {
-			String hql = "delete from AccountDTO where id = ?";
-			Query<UserDTO> query = session.createQuery(hql);
-			query.setInteger("id", id);
-			query.uniqueResult();
+			Criteria c = session.createCriteria(AccountDTO.class);
+			c.add(Restrictions.eq("id", id));
+			System.out.println("--------inside delete --------");
+			c.uniqueResult();
+			String hql = "from AccountDTO where id = ? ";
+			Query<AccountDTO> query = session.createQuery(hql);
+			status=query.executeUpdate();
+			System.out.println("Status ----> "+status);
 			session.close();
+
+			return status;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return status;
-	}
-
-	public static int id(String email) {
-		SessionFactory sessionFactory = SingleTonSF.getSF();
-		Session session = sessionFactory.openSession();
-		int id=0;
-		try {
-			Criteria  c = session.createCriteria(UserDTO.class);
-			c.add(Restrictions.eq("email", email));
-			UserDTO user = (UserDTO) c.uniqueResult();
-			id = user.getId();
-			session.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return id;
-	}
-
-	public static List<AccountDTO> getAllAccount(String city, int userId) {
-		List<AccountDTO> list = new ArrayList<AccountDTO>();
-		SessionFactory sessionFactory = SingleTonSF.getSF();
-		Session session = sessionFactory.openSession();
-		try {
-			Criteria c = session.createCriteria(AccountDTO.class);
-			c.add(Restrictions.eq("city", city));
-			c.add(Restrictions.eq("userId", userId));
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return list;
 	}
 
 	public static JSONObject updateAccount(int id) {
@@ -125,5 +132,4 @@ public class BankDAO {
 		session.update(account);
 		session.close();
 	}
-
 }

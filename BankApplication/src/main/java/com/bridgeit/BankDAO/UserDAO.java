@@ -39,9 +39,6 @@ public class UserDAO {
 		return user;
 	}
 	
-	
-	
-	
 
 	public static int saveRegistration(UserDTO user) {
 		SessionFactory factory = SingleTonSF.getSF();

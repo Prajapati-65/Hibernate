@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.xml.bind.ParseConversionEvent;
 
 import com.bridgeit.BankDAO.BankDAO;
 import com.bridgeit.BankDTO.AccountDTO;
@@ -29,11 +30,13 @@ public class AccountView extends HttpServlet {
 		HttpSession session = req.getSession();
 		String email =(String) session.getAttribute("email");
 		int id = BankDAO.id(email);
+		
+		System.out.println("city-----> "+city);
+		System.out.println("email------> "+email);
+		System.out.println("userId------> "+id);
+		
 		PrintWriter printWriter = resp.getWriter();
 		printWriter.println("<h1>Account List</h1>");
-		
-		//System.out.println("details --> "+BankDAO.getAllAccount(city,id));
-		
 		List<AccountDTO> list = BankDAO.getAllAccount(city,id);
 		req.setAttribute("list", list);
 		RequestDispatcher dispatcher = req.getRequestDispatcher("citydetails.jsp");
