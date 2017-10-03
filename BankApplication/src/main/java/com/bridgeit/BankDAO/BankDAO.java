@@ -80,15 +80,17 @@ public class BankDAO {
 
 	@SuppressWarnings({ "deprecation", "unchecked" })
 	public static int deleteAccount(int id) {
-		SessionFactory sessionFactory = SingleTonSF.getSF();
-		Session session = sessionFactory.openSession();
+		SessionFactory factory = SingleTonSF.getSF();
+		Session session = factory.openSession();
+		Transaction transaction = null;
 		int status = 0;
 		try {
-			System.out.println("--------inside delete --------");
-			String hql = "delete from AccountDTO where id = ?";
-			Query<AccountDTO> query = session.createQuery(hql);
-			status=query.executeUpdate();
-			session.close();
+			transaction = session.beginTransaction();
+			AccountDTO account = new AccountDTO();
+			account.setId(id);
+			status= (int) session.delete(account);
+			transaction.commit();
+			status = 1;
 			return status;
 		} catch (Exception e) {
 			e.printStackTrace();
