@@ -17,9 +17,6 @@ import org.hibernate.annotations.GenericGenerator;
 @Table (name="addaccount")
 public class AccountDTO implements Serializable {
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	@Column (name="name")

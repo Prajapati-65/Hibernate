@@ -30,9 +30,10 @@ public class UserDAO {
 		criteria.add(andExp);
 		UserDTO user = null;
 		List result = criteria.list();
-		for (Iterator iterator = result.iterator(); iterator.hasNext();) {
+		Iterator iterator = result.iterator(); 
+		while (iterator.hasNext()) {
 			 user = (UserDTO) iterator.next();
-			System.out.println("user name is " + user.getName());
+			System.out.println("user name is--> " + user.getName());
 			name = user.getName();
 		}
 		session.close();
@@ -55,11 +56,8 @@ public class UserDAO {
 			ex.printStackTrace();
 		} finally {
 			try {
-				if (transaction != null)
-					transaction.rollback();
 				if (session != null)
 					session.close();
-
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

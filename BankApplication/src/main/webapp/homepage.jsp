@@ -127,8 +127,6 @@
 			</div>
 
 
-
-
 			<div class="modal fade" id="addModal" role="dialog"
 				style="z-index: 1060">
 				<div class="modal-dialog">
@@ -137,7 +135,7 @@
 							<button type="button" class="close" data-dismiss="modal">&times;</button>
 							<h4 class="modal-title">Update Account</h4>
 						</div>
-						<form method="POST" action="UpdateAccount" role="form">
+						<form method="POST" action="AddAccountDetails" role="form">
 							<div class="form-group">
 								<label class="control-label" for="email">Enter the name</label>
 								<input id="nameID" name="name" type="text"

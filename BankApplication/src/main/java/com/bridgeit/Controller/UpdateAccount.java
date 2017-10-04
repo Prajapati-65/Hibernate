@@ -24,17 +24,13 @@ public class UpdateAccount extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		resp.setContentType("text/html");
 		PrintWriter out = resp.getWriter();
-		
-		
 		String accountId = req.getParameter("id");
-		JSONObject obj=BankDAO.updateAccount(Integer.parseInt(accountId));
-		out.print(obj.toJSONString());
-		System.out.println("---> "+obj.get("name"));
+		System.out.println("id----> "+accountId);
 		int pid = Integer.parseInt(accountId);
-		
-		
+		JSONObject obj=BankDAO.updateAccount(pid);
+		out.print(obj.toJSONString());
+		System.out.println("--dgfd-> "+obj.get("name"));
 		
 		BankDAO.editAccount(pid);
-		
 	}
 }
