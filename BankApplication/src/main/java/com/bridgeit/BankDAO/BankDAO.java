@@ -70,7 +70,7 @@ public class BankDAO {
 			Criteria c = session.createCriteria(AccountDTO.class);
 			c.add(Restrictions.eq("city", city));
 			c.add(Restrictions.eq("user", user));
-			list=c.list();
+			list = c.list();
 			session.close();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -78,8 +78,8 @@ public class BankDAO {
 		return list;
 	}
 
-	@SuppressWarnings({ "deprecation", "unchecked" })
 	public static int deleteAccount(int id) {
+		System.out.println("----- Inside delete function-----");
 		SessionFactory factory = SingleTonSF.getSF();
 		Session session = factory.openSession();
 		Transaction transaction = null;
@@ -88,13 +88,14 @@ public class BankDAO {
 			transaction = session.beginTransaction();
 			AccountDTO account = new AccountDTO();
 			account.setId(id);
-			status= (int) session.delete(account);
+			session.delete(account);
 			transaction.commit();
 			status = 1;
 			return status;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+
 		return status;
 	}
 
@@ -102,7 +103,6 @@ public class BankDAO {
 		JSONObject object = new JSONObject();
 		SessionFactory sessionFactory = SingleTonSF.getSF();
 		Session session = sessionFactory.openSession();
-
 		Criteria criteria = session.createCriteria(AccountDTO.class);
 		criteria.add(Restrictions.eq("id", id));
 		List result = criteria.list();
@@ -120,14 +120,27 @@ public class BankDAO {
 		return object;
 	}
 
-	public static void editAccount(int id) {
+	public static AccountDTO editAccount(int id) {
 		SessionFactory sessionFactory = SingleTonSF.getSF();
 		Session session = sessionFactory.openSession();
-		Transaction transaction = session.beginTransaction();
-		String hql = "update AccountDTO  set name=?, email=? ,city=?, accountnumber=? where id=?";
-		AccountDTO account = (AccountDTO) session.get(AccountDTO.class, id);
-		transaction.commit();
-		session.update(account);
-		session.close();
+		AccountDTO account = new AccountDTO();
+		account.setId(id);
+		Transaction transaction = null;
+		try {
+			transaction = session.beginTransaction();
+			session.update(account);
+			transaction.commit();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			try {
+				if (session != null)
+					session.close();
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return account;
 	}
 }

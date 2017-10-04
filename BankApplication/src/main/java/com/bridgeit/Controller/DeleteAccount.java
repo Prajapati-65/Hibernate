@@ -15,10 +15,15 @@ import com.bridgeit.BankDAO.BankDAO;
 public class DeleteAccount extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		System.out.println("inside delete servlet");
 		resp.setContentType("text/html");
 		PrintWriter out = resp.getWriter();
 		int id =Integer.parseInt(req.getParameter("id"));
+		
+		
+		System.out.println("delete servlet---id---"+id);
 		BankDAO.deleteAccount(id);
+		
 	}
 }
 
