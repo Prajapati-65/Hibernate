@@ -121,13 +121,20 @@ public class BankDAO {
 	}
 
 	public static AccountDTO editAccount(int id) {
+		
 		SessionFactory sessionFactory = SingleTonSF.getSF();
 		Session session = sessionFactory.openSession();
+		Transaction transaction = null;
 		AccountDTO account = new AccountDTO();
 		account.setId(id);
-		Transaction transaction = null;
 		try {
 			transaction = session.beginTransaction();
+			
+			account.getName();
+			account.getEmail();
+			account.getCity();
+			account.getAccountnumber();
+			
 			session.update(account);
 			transaction.commit();
 		} catch (Exception ex) {
@@ -143,6 +150,5 @@ public class BankDAO {
 		}
 		return account;
 	}
-	
-	
+
 }
