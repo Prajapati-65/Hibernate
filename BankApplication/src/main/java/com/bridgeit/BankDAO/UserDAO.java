@@ -18,29 +18,7 @@ import com.bridgeit.SingleTon.SingleTonSF;
 
 public class UserDAO {
 	
-	public static int saveRegistration(UserDTO user) {
-		SessionFactory factory = SingleTonSF.getSF();
-		Session session = factory.openSession();
-		Transaction transaction = null;
-		int status = 0;
-		try {
-			transaction = session.beginTransaction();
-			status = (int) session.save(user);
-			transaction.commit();
-			status = 1;
-			return status;
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		} finally {
-			try {
-				if (session != null)
-					session.close();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-		return status;
-	}
+	
 	
 	public static UserDTO loginUser(String email, String password) {
 		String name = null;
@@ -64,6 +42,29 @@ public class UserDAO {
 		return user;
 	}
 	
+	public static int saveRegistration(UserDTO user) {
+		SessionFactory factory = SingleTonSF.getSF();
+		Session session = factory.openSession();
+		Transaction transaction = null;
+		int status = 0;
+		try {
+			transaction = session.beginTransaction();
+			status = (int) session.save(user);
+			transaction.commit();
+			status = 1;
+			return status;
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			try {
+				if (session != null)
+					session.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return status;
+	}
 
 	
 
