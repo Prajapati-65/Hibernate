@@ -9,6 +9,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.cfg.Configuration;
 import org.hibernate.criterion.Restrictions;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -20,6 +21,7 @@ import com.bridgeit.SingleTon.SingleTonSF;
 public class BankDAO {
 
 	public static int id(String email) {
+
 		SessionFactory sessionFactory = SingleTonSF.getSF();
 		Session session = sessionFactory.openSession();
 		int id = 0;
@@ -121,20 +123,18 @@ public class BankDAO {
 	}
 
 	public static AccountDTO editAccount(int id) {
-		
 		SessionFactory sessionFactory = SingleTonSF.getSF();
 		Session session = sessionFactory.openSession();
 		Transaction transaction = null;
-		AccountDTO account = new AccountDTO();
-		account.setId(id);
+		AccountDTO account = (AccountDTO) session.get(AccountDTO.class, id);
 		try {
 			transaction = session.beginTransaction();
-			
 			account.getName();
+			System.out.println("asdadasda---->"+account.getName());
 			account.getEmail();
 			account.getCity();
 			account.getAccountnumber();
-			
+
 			session.update(account);
 			transaction.commit();
 		} catch (Exception ex) {
@@ -149,6 +149,23 @@ public class BankDAO {
 			}
 		}
 		return account;
+	}
+
+	
+	public static void editRow(int id, String name, String email, String city, String accountnumber) {
+
+		SessionFactory sessionFactory = SingleTonSF.getSF();
+		Session session = sessionFactory.openSession();
+		Transaction transaction = session.beginTransaction();
+		
+		AccountDTO account = (AccountDTO) session.get(AccountDTO.class, id);
+		account.setName(name);
+		account.setEmail(email);
+		account.setCity(city);
+		account.setAccountnumber(accountnumber);
+		transaction.commit();
+		session.update(account);
+		session.close();
 	}
 
 }

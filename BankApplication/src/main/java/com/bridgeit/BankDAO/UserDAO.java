@@ -35,7 +35,8 @@ public class UserDAO {
 		Iterator iterator = result.iterator(); 
 		while (iterator.hasNext()) {
 			 user = (UserDTO) iterator.next();
-			System.out.println("user name is--> " + user.getName());
+			System.out.println("user name is --> " + user.getName());
+			System.out.println("user id is --> " + user.getId());
 			name = user.getName();
 		}
 		session.close();

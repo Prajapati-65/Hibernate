@@ -29,8 +29,8 @@ public class UpdateAccount extends HttpServlet {
 		int pid = Integer.parseInt(accountId);
 		JSONObject obj=BankDAO.updateAccount(pid);
 		out.print(obj.toJSONString());
-		System.out.println("--dgfd-> "+obj.get("name"));
 		
 		BankDAO.editAccount(pid);
+		
 	}
 }
