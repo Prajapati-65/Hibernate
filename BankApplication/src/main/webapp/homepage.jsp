@@ -168,7 +168,7 @@
 								<button id="submit" type="button" name="submit"
 									class="btn btn-success" onClick="addAccount()">Add</button>
 								<button id="close" type="button" name="close"
-									class="btn btn-success om" data-dismiss="modal">Close</button>
+									class="btn btn-success abc" data-dismiss="modal">Close</button>
 							</div>
 						</form>
 
@@ -229,32 +229,6 @@
 			});
 		}
 
-		function addAccount() {
-			console.log($('#name').val());
-			$.ajax({
-				url : 'UpdateAccount',
-				type : 'post',
-				data : {
-					name : $('#nameID').val(),
-					email : $('#emailID').val(),
-					city : $('#cityID').val(),
-					accountnumber : $('#accountnumberID').val(),
-					id : currentId
-				},
-				success : function() {
-					console.log("Added");
-					$('#nameID').val(" "), $('#emailID').val(" "), $('#cityID')
-							.val(" "), $('#accountnumberID').val(" "), $(
-							'#addModal').modal('hide');
-					if (edited == 1) {
-						displayCityData(currentCity);
-						edited = 0;
-					}
-					currentId = 0;
-				}
-			});
-		}
-
 		function deleteAccount(id) {
 			$.ajax({
 				url : 'DeleteAccount',
@@ -286,6 +260,34 @@
 				}
 			});
 		}
+		
+
+		function addAccount() {
+			console.log($('#name').val());
+			$.ajax({
+				url : 'UpdateAccount',
+				type : 'post',
+				data : {
+					name : $('#nameID').val(),
+					email : $('#emailID').val(),
+					city : $('#cityID').val(),
+					accountnumber : $('#accountnumberID').val(),
+					id : currentId
+				},
+				success : function() {
+					console.log("Added");
+					$('#nameID').val(" "), $('#emailID').val(" "), $('#cityID')
+							.val(" "), $('#accountnumberID').val(" "), $(
+							'#addModal').modal('hide');
+					if (edited == 1) {
+						displayCityData(currentCity);
+						edited = 0;
+					}
+					currentId = 0;
+				}
+			});
+		}
+
 	</script>
 </body>
 </html>

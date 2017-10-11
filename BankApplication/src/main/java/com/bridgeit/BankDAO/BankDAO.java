@@ -123,7 +123,6 @@ public class BankDAO {
 	}
 	
 	public static void editRow(int id, String name, String email, String city, String accountnumber) {
-
 		SessionFactory sessionFactory = SingleTonSF.getSF();
 		Session session = sessionFactory.openSession();
 		Transaction transaction = session.beginTransaction();
@@ -137,7 +136,6 @@ public class BankDAO {
 		session.update(account);
 		transaction.commit();
 		session.close();
-		
 	}
 
 }

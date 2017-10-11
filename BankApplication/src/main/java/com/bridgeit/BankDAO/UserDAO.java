@@ -12,13 +12,15 @@ import org.hibernate.Transaction;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.LogicalExpression;
 import org.hibernate.criterion.Restrictions;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.bridgeit.BankDTO.UserDTO;
 import com.bridgeit.SingleTon.SingleTonSF;
 
 public class UserDAO {
 	
-	
+	//final static Logger logger = (Logger) LoggerFactory.getLogger(UserDAO.class);
 	
 	public static UserDTO loginUser(String email, String password) {
 		String name = null;
@@ -35,9 +37,12 @@ public class UserDAO {
 		Iterator iterator = result.iterator(); 
 		while (iterator.hasNext()) {
 			 user = (UserDTO) iterator.next();
-			System.out.println("user name is --> " + user.getName());
-			System.out.println("user id is --> " + user.getId());
-			name = user.getName();
+			 name = user.getName();
+			 
+			//logger.info("Login user");
+			//System.out.println("user name is --> " + user.getName());
+			//System.out.println("user id is --> " + user.getId());
+			
 		}
 		session.close();
 		return user;
