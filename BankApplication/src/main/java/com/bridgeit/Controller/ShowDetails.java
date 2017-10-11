@@ -8,13 +8,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.simple.JSONObject;
+
 import com.bridgeit.BankDAO.BankDAO;
 
-//@WebServlet("/UpdateAccount")
-public class UpdateAccount extends HttpServlet {
-	/**
-	 * 
-	 */
+public class ShowDetails extends HttpServlet {
+
 	private static final long serialVersionUID = 1L;
 
 	@Override
@@ -23,21 +22,13 @@ public class UpdateAccount extends HttpServlet {
 		resp.setContentType("text/html");
 		PrintWriter out = resp.getWriter();
 		String accountId = req.getParameter("id");
-		System.out.println("update id ---> " + accountId);
+		System.out.println("id----> " + accountId);
 
 		int pid = Integer.parseInt(accountId);
-		String name = req.getParameter("name");
-		String email = req.getParameter("email");
-		String city = req.getParameter("city");
-		String accountnumber = req.getParameter("accountnumber");
 
-		System.out.println("----id-----" + pid);
-		System.out.println("----name---" + name);
-		System.out.println("----email---" + email);
-		System.out.println("----city---" + city);
-		System.out.println("----accountnumber-----" + accountnumber);
-
-		BankDAO.editRow(pid, name, email, city, accountnumber);
+		JSONObject obj = BankDAO.updateAccount(pid);
+		out.print(obj.toJSONString());
+		
 	}
 
 }

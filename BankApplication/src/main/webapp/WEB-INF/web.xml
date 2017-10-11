@@ -57,6 +57,13 @@
 		<servlet-name>registrationform</servlet-name>
 		<jsp-file>/registrationform.jsp</jsp-file>
 	</servlet>
+	<servlet>
+		<description>
+		</description>
+		<display-name>ShowDetails</display-name>
+		<servlet-name>ShowDetails</servlet-name>
+		<servlet-class>com.bridgeit.Controller.ShowDetails</servlet-class>
+	</servlet>
 	<servlet-mapping>
 		<servlet-name>Login</servlet-name>
 		<url-pattern>/Login</url-pattern>
@@ -100,6 +107,10 @@
 	<servlet-mapping>
 		<servlet-name>registrationform</servlet-name>
 		<url-pattern>/registrationform</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ShowDetails</servlet-name>
+		<url-pattern>/ShowDetails</url-pattern>
 	</servlet-mapping>
 	
 	<welcome-file-list>

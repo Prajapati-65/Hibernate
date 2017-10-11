@@ -135,7 +135,7 @@
 							<button type="button" class="close" data-dismiss="modal">&times;</button>
 							<h4 class="modal-title">Update Account</h4>
 						</div>
-						<form method="POST" action="AddAccountDetails" role="form">
+						<form method="POST" action="UpdateAccount" role="form">
 							<div class="form-group">
 								<label class="control-label" for="email">Enter the name</label>
 								<input id="nameID" name="name" type="text"
@@ -165,8 +165,8 @@
 							</div>
 
 							<div class="form-group">
-								<button id="submit" type="submit" name="submit"
-									class="btn btn-success" onclick" onClick="addAccount()">Add</button>
+								<button id="submit" type="button" name="submit"
+									class="btn btn-success" onClick="addAccount()">Add</button>
 								<button id="close" type="button" name="close"
 									class="btn btn-success om" data-dismiss="modal">Close</button>
 							</div>
@@ -268,11 +268,11 @@
 			});
 		}
 
-		function updateAccount(id) {
+		function show(id) {
 			currentId = id;
 			edited = 1;
 			$.ajax({
-				url : 'UpdateAccount',
+				url : 'ShowDetails',
 				type : 'post',
 				dataType : 'JSON',
 				data : {

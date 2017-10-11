@@ -121,36 +121,6 @@ public class BankDAO {
 		session.close();
 		return object;
 	}
-
-	public static AccountDTO editAccount(int id) {
-		SessionFactory sessionFactory = SingleTonSF.getSF();
-		Session session = sessionFactory.openSession();
-		Transaction transaction = null;
-		AccountDTO account = (AccountDTO) session.get(AccountDTO.class, id);
-		try {
-			transaction = session.beginTransaction();
-			account.getName();
-			System.out.println("asdadasda---->"+account.getName());
-			account.getEmail();
-			account.getCity();
-			account.getAccountnumber();
-
-			session.update(account);
-			transaction.commit();
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		} finally {
-			try {
-				if (session != null)
-					session.close();
-
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-		return account;
-	}
-
 	
 	public static void editRow(int id, String name, String email, String city, String accountnumber) {
 
@@ -160,12 +130,14 @@ public class BankDAO {
 		
 		AccountDTO account = (AccountDTO) session.get(AccountDTO.class, id);
 		account.setName(name);
+		System.out.println("dfgfdg--"+name);
 		account.setEmail(email);
 		account.setCity(city);
 		account.setAccountnumber(accountnumber);
-		transaction.commit();
 		session.update(account);
+		transaction.commit();
 		session.close();
+		
 	}
 
 }
