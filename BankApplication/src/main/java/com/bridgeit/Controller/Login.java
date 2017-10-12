@@ -18,39 +18,29 @@ import com.bridgeit.BankDTO.UserDTO;
 
 //@WebServlet("/Login")
 public class Login extends HttpServlet {
+	
 	final static Logger logger = LoggerFactory.getLogger(Login.class);
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		resp.setContentType("text/html");
-		
-		
-		
-		
-		logger.trace("inside info logger level....");
-		logger.debug("inside debug logger level.....");
-		logger.info("inside info logger level....");
-		logger.warn("inside warn logger level....");
-		logger.error("inside error logger level.....");
 		PrintWriter out = resp.getWriter();
 		String email = req.getParameter("email");
 		String password = req.getParameter("password");
 		UserDTO user = new UserDTO();
 		user = UserDAO.loginUser(email, password);
-		
 		if (user!=null) {
 			HttpSession session = req.getSession();
 			session.setAttribute("name", user.getName());
 			session.setAttribute("email", user.getEmail());
 			session.setAttribute("id", user.getId());
+			logger.info("Welcome");
 			RequestDispatcher dispatcher = req.getRequestDispatcher("homepage.jsp");
 			dispatcher.forward(req, resp);
-			
-			
 		} else {
 			RequestDispatcher dispatcher = req.getRequestDispatcher("login.jsp");
 			dispatcher.forward(req, resp);
-			logger.error("welcome file");
+			logger.warn("Login is not successfully");
 		}
 	}
 	

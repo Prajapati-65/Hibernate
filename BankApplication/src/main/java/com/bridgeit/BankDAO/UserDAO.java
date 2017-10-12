@@ -1,6 +1,5 @@
 package com.bridgeit.BankDAO;
 
-
 import java.util.Iterator;
 import java.util.List;
 
@@ -19,9 +18,14 @@ import com.bridgeit.BankDTO.UserDTO;
 import com.bridgeit.SingleTon.SingleTonSF;
 
 public class UserDAO {
-	
-	//final static Logger logger = (Logger) LoggerFactory.getLogger(UserDAO.class);
-	
+
+	final static Logger logger = (Logger) LoggerFactory.getLogger(UserDAO.class);
+
+	/**
+	 * @param email
+	 * @param password
+	 * @return UserDTO Object
+	 */
 	public static UserDTO loginUser(String email, String password) {
 		String name = null;
 		SessionFactory factory = SingleTonSF.getSF();
@@ -29,25 +33,24 @@ public class UserDAO {
 		Criteria criteria = session.createCriteria(UserDTO.class);
 		Criterion emailVerify = Restrictions.ilike("email", email);
 		Criterion passwordVerify = Restrictions.ilike("password", password);
-
 		LogicalExpression andExp = Restrictions.and(emailVerify, passwordVerify);
 		criteria.add(andExp);
 		UserDTO user = null;
 		List result = criteria.list();
-		Iterator iterator = result.iterator(); 
+		Iterator iterator = result.iterator();
 		while (iterator.hasNext()) {
-			 user = (UserDTO) iterator.next();
-			 name = user.getName();
-			 
-			//logger.info("Login user");
-			//System.out.println("user name is --> " + user.getName());
-			//System.out.println("user id is --> " + user.getId());
-			
+			user = (UserDTO) iterator.next();
+			name = user.getName();
+			logger.info("Login succesfully");
 		}
 		session.close();
 		return user;
 	}
-	
+
+	/**
+	 * @param UserDOT user
+	 * @return Integer
+	 */
 	public static int saveRegistration(UserDTO user) {
 		SessionFactory factory = SingleTonSF.getSF();
 		Session session = factory.openSession();
@@ -58,8 +61,10 @@ public class UserDAO {
 			status = (int) session.save(user);
 			transaction.commit();
 			status = 1;
+			logger.info("Registration successfully");
 			return status;
 		} catch (Exception ex) {
+			logger.error("Throws excepation");
 			ex.printStackTrace();
 		} finally {
 			try {
@@ -67,11 +72,10 @@ public class UserDAO {
 					session.close();
 			} catch (Exception e) {
 				e.printStackTrace();
+				logger.error("Throws excepation");
 			}
 		}
 		return status;
 	}
-
-	
 
 }

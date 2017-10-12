@@ -9,11 +9,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 //@WebServlet("/LogoutAccount")
 public class LogoutAccount extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
-
+	final static Logger logger = LoggerFactory.getLogger(LogoutAccount.class);
+	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		resp.setContentType("text/html");
@@ -22,6 +26,7 @@ public class LogoutAccount extends HttpServlet {
 		HttpSession session = req.getSession();
 		session.invalidate();
 		out.close();
+		logger.info("User logout");
 	}
 
 	/**

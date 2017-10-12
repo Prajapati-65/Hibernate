@@ -22,10 +22,7 @@ public class ShowDetails extends HttpServlet {
 		resp.setContentType("text/html");
 		PrintWriter out = resp.getWriter();
 		String accountId = req.getParameter("id");
-		System.out.println("id----> " + accountId);
-
 		int pid = Integer.parseInt(accountId);
-
 		JSONObject obj = BankDAO.updateAccount(pid);
 		out.print(obj.toJSONString());
 		

@@ -49,7 +49,5 @@ public class AddAccountDetails extends HttpServlet {
 		RequestDispatcher dispatcher = req.getRequestDispatcher("homepage.jsp");
 		dispatcher.forward(req, resp);
 		
-		
-		
 	}
 }
